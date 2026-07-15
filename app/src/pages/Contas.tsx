@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useStore } from '../store/AppStore'
 import { formatBRL, parseBRL } from '../lib/money'
-import { currentMonthKey, formatDay, monthKey, todayISO } from '../lib/dates'
+import { currentMonthKey, formatDay, monthKey, monthLabel, monthShortYear, todayISO } from '../lib/dates'
 import type { Transaction } from '../types'
 import { Card, EmptyState, Field, PrimaryButton, ProgressBar, Select, SectionTitle, TextInput } from '../components/ui'
 import { Sheet } from '../components/Sheet'
@@ -26,7 +26,7 @@ export function Contas() {
           <button
             key={id}
             onClick={() => setParams({ aba: id })}
-            className={`flex-1 rounded-xl py-2 text-sm font-bold transition ${
+            className={`flex-1 rounded-xl py-2.5 text-sm font-bold transition ${
               aba === id
                 ? 'bg-white shadow-soft dark:bg-stone-700'
                 : 'text-stone-500 dark:text-stone-400'
@@ -46,21 +46,34 @@ export function Contas() {
 function Lancamentos() {
   const { state, deleteTransaction } = useStore()
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
+  const [month, setMonth] = useState<string>(currentMonthKey())
+
+  const visible = useMemo(
+    () =>
+      state.transactions
+        .filter((t) => !t.installmentPlanId || t.status === 'paid')
+        .sort((a, b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt)),
+    [state.transactions],
+  )
+
+  const availableMonths = useMemo(() => {
+    const keys = new Set(visible.map((t) => monthKey(t.date)))
+    keys.add(currentMonthKey())
+    return [...keys].sort().reverse()
+  }, [visible])
 
   const groups = useMemo(() => {
-    const visible = state.transactions
-      .filter((t) => !t.installmentPlanId || t.status === 'paid')
-      .sort((a, b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt))
     const map = new Map<string, Transaction[]>()
     for (const t of visible) {
+      if (monthKey(t.date) !== month) continue
       const list = map.get(t.date) ?? []
       list.push(t)
       map.set(t.date, list)
     }
     return [...map.entries()]
-  }, [state.transactions])
+  }, [visible, month])
 
-  if (groups.length === 0) {
+  if (visible.length === 0) {
     return (
       <Card>
         <EmptyState emoji="🐶">
@@ -72,6 +85,28 @@ function Lancamentos() {
 
   return (
     <div className="space-y-4">
+      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+        {availableMonths.map((k) => (
+          <button
+            key={k}
+            onClick={() => setMonth(k)}
+            className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-bold capitalize transition ${
+              month === k
+                ? 'bg-caramel-500 text-white shadow-soft'
+                : 'bg-white text-stone-500 dark:bg-stone-800 dark:text-stone-400'
+            }`}
+          >
+            {monthLabel(k)}
+          </button>
+        ))}
+      </div>
+      {groups.length === 0 && (
+        <Card>
+          <p className="py-2 text-center text-sm text-stone-500 dark:text-stone-400">
+            Nenhum lançamento em {monthLabel(month)}.
+          </p>
+        </Card>
+      )}
       {groups.map(([date, txs]) => (
         <div key={date}>
           <SectionTitle>
@@ -92,7 +127,7 @@ function Lancamentos() {
                   </div>
                   <p
                     className={`tabular text-sm font-bold ${
-                      t.kind === 'income' ? 'text-green-600' : ''
+                      t.kind === 'income' ? 'text-green-700 dark:text-green-400' : ''
                     }`}
                   >
                     {t.kind === 'income' ? '+' : '−'}
@@ -101,7 +136,7 @@ function Lancamentos() {
                   <button
                     onClick={() => setConfirmDelete(t.id)}
                     aria-label={`Apagar ${t.description}`}
-                    className="text-stone-300 dark:text-stone-500"
+                    className="grid size-11 shrink-0 place-items-center text-stone-400 dark:text-stone-500"
                   >
                     🗑
                   </button>
@@ -190,20 +225,20 @@ function Recorrentes() {
               {bill.active && dueThisMonth && !paid && (
                 <button
                   onClick={() => markRecurringPaid(bill.id, key)}
-                  className="rounded-full bg-green-500 px-3 py-1.5 text-white active:scale-95"
+                  className="min-h-11 rounded-full bg-green-100 px-4 text-green-700 active:scale-95 dark:bg-green-900/40 dark:text-green-300"
                 >
                   Marcar pago este mês
                 </button>
               )}
               <button
                 onClick={() => toggleRecurringBill(bill.id)}
-                className="rounded-full bg-stone-100 px-3 py-1.5 text-stone-600 dark:bg-stone-700 dark:text-stone-300"
+                className="min-h-11 rounded-full bg-stone-100 px-4 text-stone-600 dark:bg-stone-700 dark:text-stone-300"
               >
                 {bill.active ? 'Pausar' : 'Reativar'}
               </button>
               <button
                 onClick={() => deleteRecurringBill(bill.id)}
-                className="rounded-full bg-stone-100 px-3 py-1.5 text-red-500 dark:bg-stone-700"
+                className="min-h-11 rounded-full bg-stone-100 px-4 text-red-600 dark:bg-stone-700 dark:text-red-400"
               >
                 Excluir
               </button>
@@ -345,6 +380,7 @@ function Parcelas() {
           .sort((a, b) => (a.installmentIndex ?? 0) - (b.installmentIndex ?? 0))
         const paidCount = txs.filter((t) => t.status === 'paid').length
         const next = txs.find((t) => t.status === 'pending')
+        const last = txs[txs.length - 1]
         const cat = state.categories.find((c) => c.id === plan.categoryId)
         return (
           <Card key={plan.id}>
@@ -354,7 +390,7 @@ function Parcelas() {
                 <p className="truncate text-sm font-bold">{plan.description}</p>
                 <p className="text-xs text-stone-500 dark:text-stone-400">
                   {paidCount}/{plan.count} pagas · {formatBRL(Math.round(plan.totalCents / plan.count))}
-                  /mês
+                  /mês{last && ` · termina ${monthShortYear(monthKey(last.date))}`}
                 </p>
               </div>
               <p className="tabular text-sm font-bold">{formatBRL(plan.totalCents)}</p>
@@ -365,10 +401,10 @@ function Parcelas() {
             {next && (
               <button
                 onClick={() => payInstallment(next.id)}
-                className="mt-3 rounded-full bg-green-500 px-3 py-1.5 text-xs font-bold text-white active:scale-95"
+                className="mt-3 min-h-11 rounded-full bg-green-100 px-4 text-xs font-bold text-green-700 active:scale-95 dark:bg-green-900/40 dark:text-green-300"
               >
                 Pagar parcela {next.installmentIndex}/{plan.count} ·{' '}
-                {formatBRL(next.amountCents)} ({monthKey(next.date)})
+                {formatBRL(next.amountCents)} ({monthShortYear(monthKey(next.date))})
               </button>
             )}
           </Card>

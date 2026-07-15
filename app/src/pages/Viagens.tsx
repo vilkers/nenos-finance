@@ -40,7 +40,7 @@ export function Viagens() {
 
         <div className="mt-6 pb-2">
           {hasTravelBox || created ? (
-            <p className="text-sm font-bold text-green-600">
+            <p className="text-sm font-bold text-green-700 dark:text-green-400">
               Caixinha de viagem criada! Vão guardando que o módulo chega em breve ✈️
             </p>
           ) : (

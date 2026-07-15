@@ -13,7 +13,7 @@ const TABS = [
 ]
 
 export function Layout({ children }: { children: ReactNode }) {
-  const { state, setCurrentUser } = useStore()
+  const { state, setCurrentUser, notify } = useStore()
   const [showNew, setShowNew] = useState(false)
   const location = useLocation()
   const me = state.users[state.currentUser]
@@ -40,14 +40,16 @@ export function Layout({ children }: { children: ReactNode }) {
           <NavLink
             to="/ajustes"
             aria-label="Ajustes"
-            className="grid size-10 place-items-center rounded-full bg-white text-lg shadow-soft dark:bg-stone-800"
+            className="grid size-11 place-items-center rounded-full bg-white text-lg shadow-soft dark:bg-stone-800"
           >
             ⚙️
           </NavLink>
           <button
-            onClick={() =>
-              setCurrentUser(state.currentUser === 'vilker' ? 'isadora' : 'vilker')
-            }
+            onClick={() => {
+              const next = state.currentUser === 'vilker' ? 'isadora' : 'vilker'
+              setCurrentUser(next)
+              notify(`Agora registrando como ${state.users[next].name} ${state.users[next].emoji}`)
+            }}
             aria-label={`Trocar usuário (atual: ${me.name})`}
             className="grid size-11 place-items-center rounded-full font-display text-lg font-bold shadow-soft"
             style={{ background: me.color, color: 'white' }}

@@ -61,7 +61,7 @@ export function Futuro() {
                 setHorizon(h)
                 setSelected(0)
               }}
-              className={`rounded-full px-3 py-1 text-xs font-bold ${
+              className={`min-h-9 rounded-full px-3.5 text-xs font-bold ${
                 horizon === h
                   ? 'bg-white shadow-soft dark:bg-stone-700'
                   : 'text-stone-500 dark:text-stone-400'
@@ -129,7 +129,7 @@ export function Futuro() {
                     strokeWidth={2}
                   >
                     {chartData.map((d) => (
-                      <Cell key={d.index} opacity={d.index === selected ? 1 : 0.55} />
+                      <Cell key={d.index} opacity={d.index === selected ? 1 : 0.75} />
                     ))}
                   </Bar>
                   <Bar
@@ -140,7 +140,7 @@ export function Futuro() {
                     strokeWidth={2}
                   >
                     {chartData.map((d) => (
-                      <Cell key={d.index} opacity={d.index === selected ? 1 : 0.55} />
+                      <Cell key={d.index} opacity={d.index === selected ? 1 : 0.75} />
                     ))}
                   </Bar>
                   {includeEstimate && hasEstimate && (
@@ -154,7 +154,7 @@ export function Futuro() {
                       radius={[4, 4, 0, 0]}
                     >
                       {chartData.map((d) => (
-                        <Cell key={d.index} opacity={d.index === selected ? 1 : 0.55} />
+                        <Cell key={d.index} opacity={d.index === selected ? 1 : 0.75} />
                       ))}
                     </Bar>
                   )}
@@ -187,19 +187,19 @@ export function Futuro() {
                 Parcelas
               </span>
               {hasEstimate && (
-                <label className="flex items-center gap-1.5">
+                <label className="flex items-center gap-1.5 py-2">
                   <input
                     type="checkbox"
                     checked={includeEstimate}
                     onChange={(e) => setIncludeEstimate(e.target.checked)}
-                    className="accent-sky-600"
+                    className="size-5 accent-sky-600"
                   />
                   <span className="size-2.5 rounded-full opacity-50" style={{ background: COLOR_ESTIMATIVA }} />
                   Avulsas (estimativa)
                 </label>
               )}
             </div>
-            <p className="mt-2 text-[11px] text-stone-400">
+            <p className="mt-2 text-[11px] text-stone-500 dark:text-stone-400">
               Toque numa barra para ver o mês · estimativa = média de avulsas dos últimos 3 meses
             </p>
           </Card>
@@ -214,8 +214,8 @@ export function Futuro() {
                 </p>
               </div>
               <div
-                className="rounded-full px-3 py-1.5 text-sm font-extrabold text-white"
-                style={{ background: semaforo.color }}
+                className="rounded-full px-3 py-1.5 text-sm font-extrabold"
+                style={{ background: semaforo.bg, color: semaforo.text }}
               >
                 {month.rate !== null ? `${Math.round(month.rate * 100)}% da renda` : 'sem renda'}{' '}
                 {semaforo.emoji}
@@ -225,7 +225,9 @@ export function Futuro() {
               <div className="mt-3 grid grid-cols-2 gap-3 border-t border-stone-100 pt-3 text-sm dark:border-stone-700">
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-400">Sobra garantida</p>
-                  <p className="tabular font-bold text-green-600">{formatBRL(sobraGarantida)}</p>
+                  <p className="tabular font-bold text-green-700 dark:text-green-400">
+                    {formatBRL(sobraGarantida)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs text-stone-500 dark:text-stone-400">Sobra estimada</p>

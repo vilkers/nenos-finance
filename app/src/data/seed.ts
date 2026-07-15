@@ -20,8 +20,8 @@ export const USERS: Record<UserId, User> = {
 export const SEED_CATEGORIES: Category[] = [
   { id: 'moradia', name: 'Moradia', icon: '🏠', color: '#f59e0b', kind: 'expense' },
   { id: 'impostos', name: 'Impostos', icon: '🧾', color: '#78716c', kind: 'expense' },
-  { id: 'cartao', name: 'Cartão de crédito', icon: '💳', color: '#8b5cf6', kind: 'expense' },
-  { id: 'casa-servicos', name: 'Casa & Serviços', icon: '🧹', color: '#0ea5e9', kind: 'expense' },
+  { id: 'cartao', name: 'Cartão', icon: '💳', color: '#8b5cf6', kind: 'expense' },
+  { id: 'casa-servicos', name: 'Serviços', icon: '🧹', color: '#0ea5e9', kind: 'expense' },
   { id: 'estojo', name: 'Estojo', icon: '🐶', color: '#d97706', kind: 'expense' },
   { id: 'mercado', name: 'Mercado', icon: '🛒', color: '#22c55e', kind: 'expense' },
   { id: 'transporte', name: 'Transporte', icon: '🚗', color: '#64748b', kind: 'expense' },

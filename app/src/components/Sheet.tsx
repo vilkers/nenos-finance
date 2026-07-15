@@ -23,7 +23,7 @@ export function Sheet({
           <button
             onClick={onClose}
             aria-label="Fechar"
-            className="grid size-9 place-items-center rounded-full bg-stone-100 text-stone-500 dark:bg-stone-700 dark:text-stone-300"
+            className="grid size-11 place-items-center rounded-full bg-stone-100 text-stone-500 dark:bg-stone-700 dark:text-stone-300"
           >
             ✕
           </button>

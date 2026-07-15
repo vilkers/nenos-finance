@@ -31,17 +31,17 @@ export function Dashboard() {
   return (
     <div>
       {/* resumo do mês */}
-      <Card className="bg-gradient-to-br from-caramel-500 to-caramel-600 !text-white">
-        <p className="text-xs font-extrabold uppercase tracking-widest text-caramel-100">
+      <Card className="bg-gradient-to-br from-caramel-600 to-caramel-700 !text-white">
+        <p className="text-xs font-extrabold uppercase tracking-widest text-white">
           {monthLabel(key)}
         </p>
         <div className="mt-2 flex items-end justify-between">
           <div>
-            <p className="text-xs text-caramel-100">Gasto até agora</p>
+            <p className="text-xs font-bold text-white">Gasto até agora</p>
             <p className="tabular font-display text-3xl font-bold">{formatBRL(spent)}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-caramel-100">Sobra prevista</p>
+            <p className="text-xs font-bold text-white">Sobra prevista</p>
             <p className="tabular font-display text-xl font-bold">
               {income > 0 ? `${formatBRL(forecastLeft)} ${forecastLeft >= 0 ? '🟢' : '🔴'}` : '—'}
             </p>
@@ -50,7 +50,7 @@ export function Dashboard() {
         {income > 0 ? (
           <div className="mt-3">
             <ProgressBar fraction={usedFraction} color="white" />
-            <p className="mt-1 text-xs text-caramel-100">
+            <p className="mt-1 text-xs font-bold text-white">
               {Math.round(usedFraction * 100)}% da renda usada
             </p>
           </div>
@@ -82,7 +82,7 @@ export function Dashboard() {
                 {state.categories.find((c) => c.id === bill.categoryId)?.icon ?? '📋'}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-bold">{bill.description}</p>
+                <p className="line-clamp-2 text-sm font-bold">{bill.description}</p>
                 <p className="text-xs text-stone-500 dark:text-stone-400">
                   {daysLeft < 0
                     ? `atrasada há ${-daysLeft}d 🔴`
@@ -96,7 +96,7 @@ export function Dashboard() {
               <p className="tabular text-sm font-bold">{formatBRL(bill.amountCents)}</p>
               <button
                 onClick={() => markRecurringPaid(bill.id, mk)}
-                className="rounded-full bg-green-100 px-3 py-1.5 text-xs font-bold text-green-700 active:scale-95 dark:bg-green-900/40 dark:text-green-300"
+                className="min-h-11 rounded-full bg-green-100 px-4 text-xs font-bold text-green-700 active:scale-95 dark:bg-green-900/40 dark:text-green-300"
               >
                 Pagar ✓
               </button>
@@ -157,9 +157,9 @@ export function Dashboard() {
       <Link to="/conquistas">
         <Card>
           <div className="mb-2 flex items-center justify-between text-sm font-bold">
-            <span style={{ color: 'var(--color-vilker)' }}>Vilker · {vilkerPts} pts</span>
+            <span className="text-blue-600 dark:text-blue-400">Vilker · {vilkerPts} pts</span>
             <span className="text-lg">⚔️</span>
-            <span style={{ color: 'var(--color-isadora)' }}>Isadora · {isadoraPts} pts</span>
+            <span className="text-pink-600 dark:text-pink-400">Isadora · {isadoraPts} pts</span>
           </div>
           <div className="flex h-3 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-600">
             <div

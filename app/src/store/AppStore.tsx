@@ -43,6 +43,8 @@ interface StoreApi {
   celebrations: Celebration[]
   dismissCelebration: (id: string) => void
   pointToasts: PointToast[]
+  /** toast informativo sem pontos */
+  notify: (label: string) => void
   setCurrentUser: (u: UserId) => void
   setIncome: (u: UserId, cents: number) => void
   addTransaction: (input: {
@@ -192,6 +194,8 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
       pointToasts,
       dismissCelebration: (id) =>
         setCelebrations((prev) => prev.filter((c) => c.id !== id)),
+
+      notify: (label) => pushToast(0, label),
 
       setCurrentUser: (u) => setState((prev) => ({ ...prev, currentUser: u })),
 
@@ -454,7 +458,7 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
 
       resetAll: () => setState(initialState()),
     }),
-    [state, celebrations, pointToasts, mutate],
+    [state, celebrations, pointToasts, mutate, pushToast],
   )
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>

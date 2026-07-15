@@ -23,7 +23,7 @@ export function Conquistas() {
           <button
             key={id}
             onClick={() => setAba(id)}
-            className={`flex-1 rounded-xl py-2 text-sm font-bold transition ${
+            className={`flex-1 rounded-xl py-2.5 text-sm font-bold transition ${
               aba === id
                 ? 'bg-white shadow-soft dark:bg-stone-700'
                 : 'text-stone-500 dark:text-stone-400'
@@ -139,9 +139,9 @@ function Ranking() {
       <SectionTitle>Placar de {monthLabel(key)}</SectionTitle>
       <Card>
         <div className="flex items-center justify-around text-center">
-          <Placar nome="Vilker" pts={vNow} cor="var(--color-vilker)" lider={vNow > iNow} />
+          <Placar nome="Vilker" pts={vNow} cor="text-blue-600 dark:text-blue-400" lider={vNow > iNow} />
           <span className="text-2xl">⚔️</span>
-          <Placar nome="Isadora" pts={iNow} cor="var(--color-isadora)" lider={iNow > vNow} />
+          <Placar nome="Isadora" pts={iNow} cor="text-pink-600 dark:text-pink-400" lider={iNow > vNow} />
         </div>
         <div className="mt-3 flex h-3 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-600">
           <div
@@ -159,9 +159,9 @@ function Ranking() {
 
       <SectionTitle>Acumulado geral</SectionTitle>
       <Card className="flex items-center justify-around text-center">
-        <Placar nome="Vilker" pts={vTotal} cor="var(--color-vilker)" lider={vTotal > iTotal} />
+        <Placar nome="Vilker" pts={vTotal} cor="text-blue-600 dark:text-blue-400" lider={vTotal > iTotal} />
         <span className="text-2xl">🏅</span>
-        <Placar nome="Isadora" pts={iTotal} cor="var(--color-isadora)" lider={iTotal > vTotal} />
+        <Placar nome="Isadora" pts={iTotal} cor="text-pink-600 dark:text-pink-400" lider={iTotal > vTotal} />
       </Card>
 
       {monthly.length > 0 && (
@@ -203,7 +203,7 @@ function Placar({
 }) {
   return (
     <div>
-      <p className="text-sm font-bold" style={{ color: cor }}>
+      <p className={`text-sm font-bold ${cor}`}>
         {nome} {lider && '👑'}
       </p>
       <p className="tabular font-display text-2xl font-bold">{pts}</p>

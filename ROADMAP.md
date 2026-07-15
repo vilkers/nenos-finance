@@ -36,7 +36,7 @@ _Última atualização: 2026-07-15 — fase de planejamento/design._
 | 2. MVP financeiro | Lançamentos, contas recorrentes, parcelas, categorias, dashboard | ✅ |
 | 3. Futuro & Reservas | Gráficos de projeção, comprometimento de renda, caixinhas | ✅ |
 | 4. Gamificação | 18 conquistas, pontos anti-farm, ranking Vilker × Isadora | ✅ |
-| 5. Polimento | Revisão de UX/design por agentes, ajustes finos | 🔄 em andamento |
+| 5. Polimento | Revisão de UX/design por agentes, ajustes finos | ✅ (1ª rodada) |
 | 6. Sincronização | Supabase: login + dados compartilhados entre os dois | ⬜ aguardando chaves |
 | 7. Viagens | Módulo de planejamento de viagens (hoje: "em construção") | ⬜ |
 | v2 | Álbum de stickers, streak com proteção, orçamento por categoria, fatura de cartão | ⬜ |
@@ -58,6 +58,8 @@ _Última atualização: 2026-07-15 — fase de planejamento/design._
 ---
 
 ## 📜 Diário de desenvolvimento
+
+- **2026-07-15 (5)** — Auditoria de UX aplicada (15 achados do agente revisor): contraste AA nos cards laranja, botões verdes e semáforo do Futuro; todos os alvos de toque ≥44px; lixeira visível; filtro de mês nos Lançamentos; datas humanizadas nas parcelas ("fev/27"); toast ao trocar de usuário; fontes self-hosted (funcionam offline); toasts não cobrem mais o header. Verificado de novo no navegador, claro + escuro.
 
 - **2026-07-15 (4)** — Deploy automático configurado: GitHub Actions publica no GitHub Pages a cada push na `main`; CI (typecheck + build) em todas as branches. Agente revisor de UX acionado.
 - **2026-07-15 (3)** — MVP construído e verificado de ponta a ponta num navegador real (fluxo: renda → recorrência → lançamento → parcelamento → caixinha → aporte; 5 conquistas destravaram no caminho 🏆). Correções: recorrência não cobra retroativo, linha da renda no gráfico do Futuro, paleta do gráfico validada para daltonismo nos modos claro e escuro.

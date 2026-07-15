@@ -31,8 +31,8 @@ export function Reservas() {
 
   return (
     <div>
-      <Card className="bg-gradient-to-br from-caramel-500 to-caramel-600 !text-white">
-        <p className="text-xs font-extrabold uppercase tracking-widest text-caramel-100">
+      <Card className="bg-gradient-to-br from-caramel-600 to-caramel-700 !text-white">
+        <p className="text-xs font-extrabold uppercase tracking-widest text-white">
           Total guardado
         </p>
         <p className="tabular mt-1 font-display text-3xl font-bold">{formatBRL(total)}</p>
@@ -97,7 +97,7 @@ export function Reservas() {
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-bold">
                       {r.name}
-                      {r.isTravel && ' ✈️'}
+                      {r.isTravel && r.icon !== '✈️' && ' ✈️'}
                     </p>
                     {r.institution && (
                       <p className="text-xs text-stone-500 dark:text-stone-400">{r.institution}</p>
@@ -118,13 +118,13 @@ export function Reservas() {
                 <div className="mt-3 flex gap-2 text-xs font-bold">
                   <button
                     onClick={() => setMovement({ reserve: r, kind: 'aporte' })}
-                    className="rounded-full bg-green-500 px-3.5 py-1.5 text-white active:scale-95"
+                    className="min-h-11 rounded-full bg-green-100 px-4 text-green-700 active:scale-95 dark:bg-green-900/40 dark:text-green-300"
                   >
                     + Aportar
                   </button>
                   <button
                     onClick={() => setMovement({ reserve: r, kind: 'resgate' })}
-                    className="rounded-full bg-stone-100 px-3.5 py-1.5 text-stone-600 dark:bg-stone-700 dark:text-stone-300"
+                    className="min-h-11 rounded-full bg-stone-100 px-4 text-stone-600 dark:bg-stone-700 dark:text-stone-300"
                   >
                     − Resgatar
                   </button>

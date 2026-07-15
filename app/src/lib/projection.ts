@@ -106,9 +106,14 @@ function totalCents0(items: CommitmentItem[]): number {
   return items.reduce((sum, i) => sum + i.amountCents, 0)
 }
 
-export function rateColor(rate: number | null): { label: string; color: string; emoji: string } {
-  if (rate === null) return { label: 'configure a renda', color: '#a8a29e', emoji: '⚙️' }
-  if (rate < 0.5) return { label: 'tranquilo', color: '#22c55e', emoji: '🟢' }
-  if (rate <= 0.75) return { label: 'atenção', color: '#eab308', emoji: '🟡' }
-  return { label: 'apertado', color: '#ef4444', emoji: '🔴' }
+export function rateColor(rate: number | null): {
+  label: string
+  bg: string
+  text: string
+  emoji: string
+} {
+  if (rate === null) return { label: 'configure a renda', bg: '#e7e5e4', text: '#44403c', emoji: '⚙️' }
+  if (rate < 0.5) return { label: 'tranquilo', bg: '#dcfce7', text: '#166534', emoji: '🟢' }
+  if (rate <= 0.75) return { label: 'atenção', bg: '#fef9c3', text: '#713f12', emoji: '🟡' }
+  return { label: 'apertado', bg: '#fee2e2', text: '#991b1b', emoji: '🔴' }
 }

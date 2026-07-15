@@ -1,8 +1,10 @@
+@import "@fontsource-variable/baloo-2";
+@import "@fontsource-variable/nunito-sans";
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Baloo 2", system-ui, sans-serif;
-  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Baloo 2 Variable", "Baloo 2", system-ui, sans-serif;
+  --font-sans: "Nunito Sans Variable", "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* Patas & Pilas */
   --color-cream: #fff8ef;

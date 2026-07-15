@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/baloo-2": "^5.2.7",
+    "@fontsource-variable/nunito-sans": "^5.2.7",
     "@supabase/supabase-js": "^2.110.5",
     "@tailwindcss/vite": "^4.3.2",
     "date-fns": "^4.4.0",

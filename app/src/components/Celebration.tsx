@@ -32,13 +32,13 @@ export function CelebrationLayer() {
   return (
     <>
       {/* toasts de pontos */}
-      <div className="pointer-events-none fixed inset-x-0 top-3 z-40 flex flex-col items-center gap-2 px-4">
+      <div className="pointer-events-none fixed inset-x-0 top-16 z-40 flex flex-col items-center gap-2 px-4">
         {pointToasts.map((t) => (
           <div
             key={t.id}
             className="animate-toast-in rounded-full bg-ink/90 px-4 py-2 text-sm font-bold text-white shadow-soft dark:bg-white/90 dark:text-ink"
           >
-            +{t.points} pts · {t.label}
+            {t.points > 0 ? `+${t.points} pts · ${t.label}` : t.label}
           </div>
         ))}
       </div>

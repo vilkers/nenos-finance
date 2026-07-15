@@ -27,6 +27,11 @@ export function monthLabel(key: string, style: 'long' | 'short' = 'long'): strin
     : format(date, 'MMM', { locale: ptBR })
 }
 
+/** "2027-02" → "fev/27" */
+export function monthShortYear(key: string): string {
+  return format(parseISO(`${key}-01`), 'MMM/yy', { locale: ptBR })
+}
+
 export function formatDay(dateISO: string): string {
   return format(parseISO(dateISO), "d 'de' MMMM", { locale: ptBR })
 }
