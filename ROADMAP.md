@@ -31,13 +31,15 @@ _Última atualização: 2026-07-15 — fase de planejamento/design._
 
 | Fase | Entrega | Status |
 |------|---------|--------|
-| 0. Planejamento | Spec de produto + UX (docs/), decisões de design com o Vilker | 🔄 em andamento |
-| 1. Fundação | Scaffold do app, deploy automático, tela inicial | ⬜ |
-| 2. MVP financeiro | Lançamentos, contas recorrentes, categorias, dashboard | ⬜ |
-| 3. Futuro & Reservas | Gráficos de projeção, comprometimento de renda, caixinhas | ⬜ |
-| 4. Gamificação | Conquistas, stickers, pontos, ranking Vilker × Isadora | ⬜ |
-| 5. Polimento | Revisão de UX/design por agentes, ajustes finos | ⬜ |
-| 6. Viagens | Módulo de planejamento de viagens (hoje: "em construção") | ⬜ |
+| 0. Planejamento | Spec de produto + UX (docs/), decisões de design com o Vilker | ✅ |
+| 1. Fundação | Scaffold do app, deploy automático, tela inicial | ✅ |
+| 2. MVP financeiro | Lançamentos, contas recorrentes, parcelas, categorias, dashboard | ✅ |
+| 3. Futuro & Reservas | Gráficos de projeção, comprometimento de renda, caixinhas | ✅ |
+| 4. Gamificação | 18 conquistas, pontos anti-farm, ranking Vilker × Isadora | ✅ |
+| 5. Polimento | Revisão de UX/design por agentes, ajustes finos | 🔄 em andamento |
+| 6. Sincronização | Supabase: login + dados compartilhados entre os dois | ⬜ aguardando chaves |
+| 7. Viagens | Módulo de planejamento de viagens (hoje: "em construção") | ⬜ |
+| v2 | Álbum de stickers, streak com proteção, orçamento por categoria, fatura de cartão | ⬜ |
 
 ---
 
@@ -57,4 +59,7 @@ _Última atualização: 2026-07-15 — fase de planejamento/design._
 
 ## 📜 Diário de desenvolvimento
 
-- **2026-07-15** — Projeto iniciado. Agente de planejamento/UX acionado para gerar `docs/PRODUTO.md` e `docs/UX.md`. Perguntas de design enviadas ao Vilker.
+- **2026-07-15 (4)** — Deploy automático configurado: GitHub Actions publica no GitHub Pages a cada push na `main`; CI (typecheck + build) em todas as branches. Agente revisor de UX acionado.
+- **2026-07-15 (3)** — MVP construído e verificado de ponta a ponta num navegador real (fluxo: renda → recorrência → lançamento → parcelamento → caixinha → aporte; 5 conquistas destravaram no caminho 🏆). Correções: recorrência não cobra retroativo, linha da renda no gráfico do Futuro, paleta do gráfico validada para daltonismo nos modos claro e escuro.
+- **2026-07-15 (2)** — Decisões fechadas com o Vilker: Supabase para sync, visual lúdico com Estojo mascote, nome Nenos Finance. Specs entregues pelo agente em `docs/`.
+- **2026-07-15 (1)** — Projeto iniciado. Agente de planejamento/UX acionado para gerar `docs/PRODUTO.md` e `docs/UX.md`. Perguntas de design enviadas ao Vilker.
