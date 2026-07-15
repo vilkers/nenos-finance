@@ -43,12 +43,13 @@ _Última atualização: 2026-07-15 — fase de planejamento/design._
 
 ## ❓ Decisões em aberto (aguardando o Vilker)
 
-1. **Stack/sincronização**: app com backend (dados sincronizados entre os dois) vs. local no aparelho.
-2. **Direção visual**: lúdica com o Estojo de mascote? Fintech clean? Outra?
-3. **Nome/identidade**: "Nenos Finance" fica? Estojo vira mascote oficial?
+1. **Chaves do Supabase**: Vilker vai criar o projeto no supabase.com e passar URL + anon key (até lá o app roda em modo local).
 
 ## ✅ Decisões tomadas
 
+- **2026-07-15 — Dados**: Supabase (login + banco na nuvem, sincronizado entre os dois). Enquanto as chaves não chegam, o app funciona em modo local no navegador.
+- **2026-07-15 — Visual**: direção lúdica, com o Estojo 🐶 como mascote oficial (alegre, mas polido).
+- **2026-07-15 — Nome**: Nenos Finance, confirmado.
 - Repositório: `vilkers/nenos-finance`, desenvolvimento na branch `claude/financial-app-gamification-n4b5ik`.
 - Documento vivo: este arquivo (ROADMAP.md) + specs em `docs/`.
 

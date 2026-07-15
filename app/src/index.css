@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Patas & Pilas */
+  --color-cream: #fff8ef;
+  --color-cream-dark: #f7ecdb;
+  --color-ink: #292524;
+  --color-caramel-50: #fffbeb;
+  --color-caramel-100: #fef3c7;
+  --color-caramel-200: #fde68a;
+  --color-caramel-300: #fcd34d;
+  --color-caramel-400: #fbbf24;
+  --color-caramel-500: #f59e0b;
+  --color-caramel-600: #d97706;
+  --color-caramel-700: #b45309;
+  --color-vilker: #3b82f6;
+  --color-isadora: #ec4899;
+
+  --radius-blob: 1.25rem;
+  --shadow-soft: 0 4px 16px rgb(41 37 36 / 0.08);
+}
+
+html {
+  background: var(--color-cream);
+  --card-surface: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --card-surface: #292524;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #1c1917;
+  }
+  body {
+    color: #fafaf9;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* animações de celebração */
+@keyframes pop-in {
+  0% { transform: scale(0.3) rotate(-12deg); opacity: 0; }
+  70% { transform: scale(1.12) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.animate-pop-in { animation: pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0.6; }
+}
+.confetti-piece {
+  position: fixed;
+  top: 0;
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti-fall 2.6s ease-in forwards;
+  pointer-events: none;
+  z-index: 100;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.28s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+@keyframes toast-in {
+  0% { transform: translateY(-120%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.animate-toast-in { animation: toast-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+.animate-wiggle { animation: wiggle 1.6s ease-in-out infinite; }
